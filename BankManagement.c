@@ -6,17 +6,14 @@
 #define ADMIN_TYPE 1
 #define CUSTOMER_TYPE 2
 
-//USE STRC
-
-
 struct Customer {
 	int accType;
 	char firstName[64];
 	char lastName[64];
 	int accNum;
 	int password;
+	float balance;
 };
-
 
 struct Admin {
 	int accType;
@@ -26,6 +23,17 @@ struct Admin {
 	int password;
 };
 
+float deposit(float amount, struct Customer customer){
+	float newBalance;
+	
+	return newBalance;
+}
+
+float withdraw(float amount, struct Customer customer){
+	float newBalance;
+
+	return newBalance;
+}
 
 
 int authenticate(int userType, int accNum, int password){
@@ -69,6 +77,7 @@ int authenticate(int userType, int accNum, int password){
 	return authenticated;
 }
 
+
 void createAccount(int userType){
 	char firstName[64];
 	char lastName[64];
@@ -78,9 +87,9 @@ void createAccount(int userType){
 	scanf("%s", firstName);
 	printf("Enter your last name: ");
 	scanf("%s", lastName);
-	printf("Enter your new account number: \n");
+	printf("Enter your new account number: ");
 	scanf("%d", &accNum);
-	printf("Enter your new password\n");
+	printf("Enter your new password: ");
 	scanf("%d", &password);
 
 	if (userType == 2){
@@ -131,43 +140,45 @@ void createAccount(int userType){
     	// close file 
     	fclose (adminfile); 
 	}
-	
-
 }
 
 
 
 void admin(){
 	int logout = 0;
-	int authenticated, accNum, password;
-	printf("account number: \n");
+	int authenticated, accNum, password, choice;
+	printf("account number: ");
 	scanf("%d", &accNum);
-	printf("Enter password: \n");
+	printf("Enter password: ");
 	scanf("%d", &password);
 	authenticated = authenticate(ADMIN_TYPE, accNum, password);
 	if (authenticated == 1) {
 		while (logout == 0){
 			// admin menu.
 		}
+	} else {
+		printf("Login failed");
+		admin();
 	}
-
 }
 
 
 void customer(){
 	int logout = 0;
 	int authenticated, accNum, password;
-	printf("account number: \n");
+	printf("Account number: ");
 	scanf("%d", &accNum);
-	printf("Enter password: \n");
+	printf("Enter password: ");
 	scanf("%d", &password);
 	authenticated = authenticate(CUSTOMER_TYPE, accNum, password);
 	if (authenticated == 1) {
 		while (logout == 0){
 			// customer menu.
 		}
+	} else {
+		printf("Login failed");
+		customer();
 	}
-
 }
 
 
@@ -188,17 +199,15 @@ int main(){
 		} else if (userType == 2){
 			selected = 1;
 			system("cls");
-			//customer();
-			createAccount(CUSTOMER_TYPE);
-		} else if(selected == SPECIAL_KEY) {
+			customer();
+		} else if(userType == SPECIAL_KEY) {
 			system("cls");
 			selected = 1;
 			createAccount(SPECIAL_KEY);
-
 		} else {
 			system("cls");
 			printf("Please enter the correct type\n");
-			printf("1: Admin \n2: Customer \n3: New Customer \n");
+			printf("1: Admin \n2: Customer: ");
 			scanf("%d", &userType);
 		}
 	}
