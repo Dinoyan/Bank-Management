@@ -143,7 +143,6 @@ void createAccount(int userType){
 }
 
 
-
 void admin(){
 	int logout = 0;
 	int authenticated, accNum, password, choice;
@@ -154,7 +153,22 @@ void admin(){
 	authenticated = authenticate(ADMIN_TYPE, accNum, password);
 	if (authenticated == 1) {
 		while (logout == 0){
-			// admin menu.
+			printf("Admin Interface: \n");
+			printf("Menu: \n");
+			printf("1: Deposit \n2:withdraw \n3: logout");
+			switch(choice) {
+				case 1:
+			    	deposit();
+		            break;
+		        case 2:
+		            withdraw();
+		            break;
+		        case 3:
+		        	exit();
+		            break;
+		        default:
+		            printf("Wrong choice!!!\nEnter the correct choice\n");
+		        }
 		}
 	} else {
 		printf("Login failed");
@@ -173,7 +187,22 @@ void customer(){
 	authenticated = authenticate(CUSTOMER_TYPE, accNum, password);
 	if (authenticated == 1) {
 		while (logout == 0){
-			// customer menu.
+			printf("Customer Interface: \n");
+			printf("Menu: \n");
+			printf("1: Balance \n2: Statement \n3: logout");
+			switch(choice) {
+				case 1:
+			    	
+		            break;
+		        case 2:
+		            
+		            break;
+		        case 3:
+		        	exit();
+		            break;
+		        default:
+		            printf("Wrong choice!!!\nEnter the correct choice\n");
+		        }
 		}
 	} else {
 		printf("Login failed");
