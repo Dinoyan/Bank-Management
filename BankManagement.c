@@ -23,14 +23,18 @@ struct Admin {
 	int password;
 };
 
+void getStatement(){
+
+}
+
 float deposit(float amount, struct Customer customer){
-	float newBalance;
+	float newBalance = 0.0;
 	
 	return newBalance;
 }
 
 float withdraw(float amount, struct Customer customer){
-	float newBalance;
+	float newBalance = 0.0;
 
 	return newBalance;
 }
@@ -71,9 +75,7 @@ int authenticate(int userType, int accNum, int password){
 				authenticated = 0;
 			}
 		}
-
 	}
-
 	return authenticated;
 }
 
@@ -143,8 +145,27 @@ void createAccount(int userType){
 }
 
 
-void admin(){
+void adminInterface(){
 	int logout = 0;
+	int choice;
+	printf("Admin Interface: ");
+	printf("Menu: \n");
+	printf("a: Deposit \nb: Withdraw \nc: Logout \n");
+	while ((getchar()) != '\n'); 
+	scanf("%d", &choice);
+	if (choice == 1) {
+		
+	} else if (choice == 2) {
+		
+	} else if (choice == 3) {
+		system("cls");
+	} else {
+		adminInterface();
+	}
+}
+
+
+void admin(){
 	int authenticated, accNum, password, choice;
 	printf("account number: ");
 	scanf("%d", &accNum);
@@ -152,26 +173,9 @@ void admin(){
 	scanf("%d", &password);
 	authenticated = authenticate(ADMIN_TYPE, accNum, password);
 	if (authenticated == 1) {
-		while (logout == 0){
-			printf("Admin Interface: \n");
-			printf("Menu: \n");
-			printf("1: Deposit \n2:withdraw \n3: logout");
-			switch(choice) {
-				case 1:
-			    	deposit();
-		            break;
-		        case 2:
-		            withdraw();
-		            break;
-		        case 3:
-		        	exit();
-		            break;
-		        default:
-		            printf("Wrong choice!!!\nEnter the correct choice\n");
-		        }
-		}
+		adminInterface();
 	} else {
-		printf("Login failed");
+		printf("Login failed\n");
 		admin();
 	}
 }
@@ -179,26 +183,24 @@ void admin(){
 
 void customer(){
 	int logout = 0;
-	int authenticated, accNum, password;
+	int authenticated, accNum, password, choice;
 	printf("Account number: ");
 	scanf("%d", &accNum);
 	printf("Enter password: ");
 	scanf("%d", &password);
 	authenticated = authenticate(CUSTOMER_TYPE, accNum, password);
 	if (authenticated == 1) {
+		printf("Customer Interface: \n");
+		printf("Menu: \n");
+		printf("1: Balance \n2: Statement \n3: logout");
 		while (logout == 0){
-			printf("Customer Interface: \n");
-			printf("Menu: \n");
-			printf("1: Balance \n2: Statement \n3: logout");
 			switch(choice) {
 				case 1:
-			    	
 		            break;
 		        case 2:
-		            
 		            break;
 		        case 3:
-		        	exit();
+		        	logout = 1;
 		            break;
 		        default:
 		            printf("Wrong choice!!!\nEnter the correct choice\n");
@@ -223,18 +225,18 @@ int main(){
 	while (selected == 0) {
 		if(userType == 1){
 			selected = 1;
-			system("cls");
+			
 			admin();
 		} else if (userType == 2){
 			selected = 1;
-			system("cls");
+			
 			customer();
 		} else if(userType == SPECIAL_KEY) {
-			system("cls");
+			
 			selected = 1;
 			createAccount(SPECIAL_KEY);
 		} else {
-			system("cls");
+			
 			printf("Please enter the correct type\n");
 			printf("1: Admin \n2: Customer: ");
 			scanf("%d", &userType);
