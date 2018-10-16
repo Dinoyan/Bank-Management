@@ -23,17 +23,20 @@ struct Admin {
 	int password;
 };
 
+
 void getStatement(){
 
 }
 
-float deposit(float amount, struct Customer customer){
+
+void deposit(){
 	float newBalance = 0.0;
 	
 	return newBalance;
 }
 
-float withdraw(float amount, struct Customer customer){
+
+float withdraw(){
 	float newBalance = 0.0;
 
 	return newBalance;
@@ -145,27 +148,28 @@ void createAccount(int userType){
 }
 
 
-void adminInterface(){
+void adminInterface() {
 	int logout = 0;
 	int choice;
 	printf("Admin Interface: ");
 	printf("Menu: \n");
-	printf("a: Deposit \nb: Withdraw \nc: Logout \n");
+	printf("1: Deposit \n2: Withdraw \n3: Logout \n");
 	while ((getchar()) != '\n'); 
 	scanf("%d", &choice);
 	if (choice == 1) {
-		
+		deposit();
 	} else if (choice == 2) {
-		
+		withdraw();
 	} else if (choice == 3) {
-		system("cls");
+		system("clear");
+		printf("logged out successfully\n");
 	} else {
 		adminInterface();
 	}
 }
 
 
-void admin(){
+void admin() {
 	int authenticated, accNum, password, choice;
 	printf("account number: ");
 	scanf("%d", &accNum);
@@ -173,15 +177,38 @@ void admin(){
 	scanf("%d", &password);
 	authenticated = authenticate(ADMIN_TYPE, accNum, password);
 	if (authenticated == 1) {
+		system("clear");
 		adminInterface();
 	} else {
+		system("clear");
 		printf("Login failed\n");
 		admin();
 	}
 }
 
+void customerInterface() {
+	int logout = 0;
+	int choice;
+	printf("Customer Interface: ");
+	printf("Menu: \n");
+	printf("1: Balance \n2: Statement \n3: logout");
+	while ((getchar()) != '\n'); 
+	scanf("%d", &choice);
+	if (choice == 1) {
+		
+	} else if (choice == 2) {
+		getStatement();
+	} else if (choice == 3) {
+		system("clear");
+		printf("logged out successfully\n");
+	} else {
+		system("clear");
+		customerInterface();
+	}
+}
 
-void customer(){
+
+void customer() {
 	int logout = 0;
 	int authenticated, accNum, password, choice;
 	printf("Account number: ");
@@ -190,23 +217,10 @@ void customer(){
 	scanf("%d", &password);
 	authenticated = authenticate(CUSTOMER_TYPE, accNum, password);
 	if (authenticated == 1) {
-		printf("Customer Interface: \n");
-		printf("Menu: \n");
-		printf("1: Balance \n2: Statement \n3: logout");
-		while (logout == 0){
-			switch(choice) {
-				case 1:
-		            break;
-		        case 2:
-		            break;
-		        case 3:
-		        	logout = 1;
-		            break;
-		        default:
-		            printf("Wrong choice!!!\nEnter the correct choice\n");
-		        }
-		}
+		system("clear");
+		customerInterface();
 	} else {
+		system("clear");
 		printf("Login failed");
 		customer();
 	}
@@ -225,14 +239,14 @@ int main(){
 	while (selected == 0) {
 		if(userType == 1){
 			selected = 1;
-			
+			system("clear");
 			admin();
 		} else if (userType == 2){
 			selected = 1;
-			
+			system("clear");
 			customer();
 		} else if(userType == SPECIAL_KEY) {
-			
+			system("clear");
 			selected = 1;
 			createAccount(SPECIAL_KEY);
 		} else {
