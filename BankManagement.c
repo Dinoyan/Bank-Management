@@ -1,5 +1,5 @@
-#include <stdio.h> 
-#include <stdlib.h> 
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #define SPECIAL_KEY 1998
@@ -24,41 +24,41 @@ struct Admin {
 };
 
 
-void getStatement(){
+void getStatement() {
 
 }
 
 
-void deposit(){
-	float newBalance = 0.0;
-	
-	return newBalance;
-}
-
-
-float withdraw(){
+void deposit() {
 	float newBalance = 0.0;
 
 	return newBalance;
 }
 
 
-int authenticate(int userType, int accNum, int password){
+float withdraw() {
+	float newBalance = 0.0;
+
+	return newBalance;
+}
+
+
+int authenticate(int userType, int accNum, int password) {
 	int authenticated = 0;
 
-	if (userType == 1){
+	if (userType == 1) {
 		FILE *adminfile;
 		struct Admin admin;
 
 		adminfile = fopen("admin.dat", "r");
-		if(adminfile == NULL) {
+		if (adminfile == NULL) {
 			fprintf(stderr, "\nError opening file\n");
 			exit(1);
 		}
-		while(fread(&admin, sizeof(struct Admin), 1, adminfile)){
-			if ((admin.accNum == accNum) && (admin.password == password)){
+		while (fread(&admin, sizeof(struct Admin), 1, adminfile)) {
+			if ((admin.accNum == accNum) && (admin.password == password)) {
 				authenticated = 1;
-			} 
+			}
 		}
 
 	} else {
@@ -66,12 +66,12 @@ int authenticate(int userType, int accNum, int password){
 		struct Customer customer;
 
 		customerfile = fopen("customer.dat", "r");
-		if(customerfile == NULL) {
+		if (customerfile == NULL) {
 			fprintf(stderr, "\nError opening file\n");
 			exit(1);
 		}
-		while(fread(&customer, sizeof(struct Customer), 1, customerfile)){
-			if ((customer.accNum == accNum) && (customer.password == password)){
+		while (fread(&customer, sizeof(struct Customer), 1, customerfile)) {
+			if ((customer.accNum == accNum) && (customer.password == password)) {
 				authenticated = 1;
 				printf("success\n");
 			} else {
@@ -83,7 +83,7 @@ int authenticate(int userType, int accNum, int password){
 }
 
 
-void createAccount(int userType){
+void createAccount(int userType) {
 	char firstName[64];
 	char lastName[64];
 	int password;
@@ -97,53 +97,53 @@ void createAccount(int userType){
 	printf("Enter your new password: ");
 	scanf("%d", &password);
 
-	if (userType == 2){
-		FILE *customerfile; 
-      
-    	// open file for writing 
-    	customerfile = fopen ("customer.dat", "w"); 
-    	if (customerfile == NULL) { 
-        	fprintf(stderr, "\nError opend file\n"); 
-        	exit (1); 
-    	} 
+	if (userType == 2) {
+		FILE *customerfile;
 
-    	struct Customer customer;
+		// open file for writing
+		customerfile = fopen ("customer.dat", "w");
+		if (customerfile == NULL) {
+			fprintf(stderr, "\nError opend file\n");
+			exit (1);
+		}
 
-    	strcpy(customer.firstName, firstName);
-    	strcpy(customer.lastName, lastName);
-    	customer.accType = CUSTOMER_TYPE;
-    	customer.accNum = accNum;
-    	customer.password = password;
-      	
-    	// write struct to file 
-    	fwrite (&customer, sizeof(struct Customer), 1, customerfile); 
-      
-    
-    	// close file 
-    	authenticate(2, accNum, password);
-	} else if(userType == SPECIAL_KEY) {
-		FILE *adminfile; 
-      
-    	// open file for writing 
-    	adminfile = fopen ("admin.dat", "w"); 
-    	if (adminfile == NULL) { 
-        	fprintf(stderr, "\nError opend file\n"); 
-        	exit (1); 
-    	} 
+		struct Customer customer;
 
-    	struct Admin admin;
-  
-   	 	strcpy(admin.firstName, firstName);
-    	strcpy(admin.lastName, lastName);
-    	admin.accType = ADMIN_TYPE;
-    	admin.accNum = accNum;
-    	admin.password = password;
-      
-    	// write struct to file 
-    	fwrite (&admin, sizeof(struct Admin), 1, adminfile); 
-     
-    	// close file 
-    	fclose (adminfile); 
+		strcpy(customer.firstName, firstName);
+		strcpy(customer.lastName, lastName);
+		customer.accType = CUSTOMER_TYPE;
+		customer.accNum = accNum;
+		customer.password = password;
+
+		// write struct to file
+		fwrite (&customer, sizeof(struct Customer), 1, customerfile);
+
+
+		// close file
+		authenticate(2, accNum, password);
+	} else if (userType == SPECIAL_KEY) {
+		FILE *adminfile;
+
+		// open file for writing
+		adminfile = fopen ("admin.dat", "w");
+		if (adminfile == NULL) {
+			fprintf(stderr, "\nError opend file\n");
+			exit (1);
+		}
+
+		struct Admin admin;
+
+		strcpy(admin.firstName, firstName);
+		strcpy(admin.lastName, lastName);
+		admin.accType = ADMIN_TYPE;
+		admin.accNum = accNum;
+		admin.password = password;
+
+		// write struct to file
+		fwrite (&admin, sizeof(struct Admin), 1, adminfile);
+
+		// close file
+		fclose (adminfile);
 	}
 }
 
@@ -154,7 +154,7 @@ void adminInterface() {
 	printf("Admin Interface: ");
 	printf("Menu: \n");
 	printf("1: Deposit \n2: Withdraw \n3: Logout \n");
-	while ((getchar()) != '\n'); 
+	while ((getchar()) != '\n');
 	scanf("%d", &choice);
 	if (choice == 1) {
 		deposit();
@@ -192,10 +192,10 @@ void customerInterface() {
 	printf("Customer Interface: ");
 	printf("Menu: \n");
 	printf("1: Balance \n2: Statement \n3: logout");
-	while ((getchar()) != '\n'); 
+	while ((getchar()) != '\n');
 	scanf("%d", &choice);
 	if (choice == 1) {
-		
+
 	} else if (choice == 2) {
 		getStatement();
 	} else if (choice == 3) {
@@ -227,7 +227,7 @@ void customer() {
 }
 
 
-int main(){
+int main() {
 	int userType;
 	int selected = 0;
 
@@ -237,20 +237,20 @@ int main(){
 	scanf("%d", &userType);
 
 	while (selected == 0) {
-		if(userType == 1){
+		if (userType == 1) {
 			selected = 1;
 			system("clear");
 			admin();
-		} else if (userType == 2){
+		} else if (userType == 2) {
 			selected = 1;
 			system("clear");
 			customer();
-		} else if(userType == SPECIAL_KEY) {
+		} else if (userType == SPECIAL_KEY) {
 			system("clear");
 			selected = 1;
 			createAccount(SPECIAL_KEY);
 		} else {
-			
+
 			printf("Please enter the correct type\n");
 			printf("1: Admin \n2: Customer: ");
 			scanf("%d", &userType);
