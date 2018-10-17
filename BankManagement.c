@@ -34,8 +34,6 @@ void getStatement() {
 
 void deposit() {
 	float newBalance = 0.0;
-
-	return newBalance;
 }
 
 
@@ -89,8 +87,21 @@ int authenticate(int userType, int accNum, int password) {
 void createAccount(int userType) {
 	char firstName[64];
 	char lastName[64];
+	char accountType;
 	int password;
 	int accNum;
+
+	if (userType == SPECIAL_KEY) {
+		printf("Customer Account [y/n]: ");
+		while ((getchar()) != '\n');
+		scanf("%c", &accountType);
+		if (accountType == 'y') {
+			userType = 2;
+		} else {
+			userType = SPECIAL_KEY;
+		}
+	}
+
 	printf("Enter your first name: ");
 	scanf("%s", firstName);
 	printf("Enter your last name: ");
@@ -153,37 +164,45 @@ void createAccount(int userType) {
 
 void adminInterface() {
 	int logout = 0;
-	int choice;
+	int choice, accNum, password, authenticated;
 	printf("Admin Interface: ");
 	printf("Hello, please login!\n");
 
-	// ASK THE CUSTOMER TO LOGIN 
-	// ACOMPLISH THEIR WORK
-
-	printf("----menu---- \n");
-	printf("1: Deposit \n2: Withdraw \n3: Logout \n");
+	printf("Account number: ");
 	while ((getchar()) != '\n');
-	scanf("%d", &choice);
-	if (choice == 1) {
-		deposit();
-	} else if (choice == 2) {
-		withdraw();
-	} else if (choice == 3) {
-		activeAdminSession = 0;
-		system("clear");
-		printf("logged out successfully\n");
-		printf("--------------------------\n");
-	} else {
-		adminInterface();
+	scanf("%d", &accNum);
+	printf("Enter password: ");
+	while ((getchar()) != '\n');
+	scanf("%d", &password);
+	authenticated = authenticate(CUSTOMER_TYPE, accNum, password);
+	if (authenticated == 1) {
+		activeCustomerSession = 1;
+		printf("How can i help you today?\n");
+		printf("----menu---- \n");
+		printf("1: Deposit \n2: Withdraw \n3: logout \n");
+		while ((getchar()) != '\n');
+		scanf("%d", &choice);
+		if (choice == 1) {
+			deposit();
+		} else if (choice == 2) {
+			withdraw();
+		} else if (choice == 3) {
+			activeCustomerSession = 0;
+			system("clear");
+			printf("logged out successfully\n");
+			printf("--------------------------\n");
+		} else {
+			adminInterface();
+		}
 	}
 }
 
 
 void admin() {
 	int authenticated, accNum, password, choice;
-	printf("account number: ");
+	printf("Account number: ");
 	scanf("%d", &accNum);
-	printf("enter password: ");
+	printf("Enter password: ");
 	scanf("%d", &password);
 	authenticated = authenticate(ADMIN_TYPE, accNum, password);
 	if (authenticated == 1) {
@@ -259,7 +278,7 @@ int main() {
 			system("clear");
 			admin();
 		} else if (userType == 2) {
-			selected = 1;
+			selected = 2;
 			system("clear");
 			customer();
 		} else if (userType == SPECIAL_KEY) {
