@@ -6,6 +6,9 @@
 #define ADMIN_TYPE 1
 #define CUSTOMER_TYPE 2
 
+int activeCustomerSession = 0;
+int activeAdminSession = 0;
+
 struct Customer {
 	int accType;
 	char firstName[64];
@@ -152,7 +155,12 @@ void adminInterface() {
 	int logout = 0;
 	int choice;
 	printf("Admin Interface: ");
-	printf("Menu: \n");
+	printf("Hello, please login!\n");
+
+	// ASK THE CUSTOMER TO LOGIN 
+	// ACOMPLISH THEIR WORK
+
+	printf("----menu---- \n");
 	printf("1: Deposit \n2: Withdraw \n3: Logout \n");
 	while ((getchar()) != '\n');
 	scanf("%d", &choice);
@@ -161,8 +169,10 @@ void adminInterface() {
 	} else if (choice == 2) {
 		withdraw();
 	} else if (choice == 3) {
+		activeAdminSession = 0;
 		system("clear");
 		printf("logged out successfully\n");
+		printf("--------------------------\n");
 	} else {
 		adminInterface();
 	}
@@ -173,25 +183,28 @@ void admin() {
 	int authenticated, accNum, password, choice;
 	printf("account number: ");
 	scanf("%d", &accNum);
-	printf("Enter password: ");
+	printf("enter password: ");
 	scanf("%d", &password);
 	authenticated = authenticate(ADMIN_TYPE, accNum, password);
 	if (authenticated == 1) {
+		activeAdminSession = 1;
 		system("clear");
 		adminInterface();
 	} else {
 		system("clear");
 		printf("Login failed\n");
+		printf("--------------------------\n");
 		admin();
 	}
 }
+
 
 void customerInterface() {
 	int logout = 0;
 	int choice;
 	printf("Customer Interface: ");
-	printf("Menu: \n");
-	printf("1: Balance \n2: Statement \n3: logout");
+	printf("----menu---- \n");
+	printf("|1: Balance| \n|2: Statement| \n|3: logout|");
 	while ((getchar()) != '\n');
 	scanf("%d", &choice);
 	if (choice == 1) {
@@ -199,8 +212,10 @@ void customerInterface() {
 	} else if (choice == 2) {
 		getStatement();
 	} else if (choice == 3) {
+		activeCustomerSession = 0;
 		system("clear");
 		printf("logged out successfully\n");
+		printf("--------------------------\n");
 	} else {
 		system("clear");
 		customerInterface();
@@ -217,11 +232,13 @@ void customer() {
 	scanf("%d", &password);
 	authenticated = authenticate(CUSTOMER_TYPE, accNum, password);
 	if (authenticated == 1) {
+		activeCustomerSession = 1;
 		system("clear");
 		customerInterface();
 	} else {
 		system("clear");
 		printf("Login failed");
+		printf("--------------------------\n");
 		customer();
 	}
 }
@@ -231,9 +248,9 @@ int main() {
 	int userType;
 	int selected = 0;
 
-	printf("Welcome to Dinoyan's Bank\n");
-	printf("Select your account type\n");
-	printf("1: Admin 2: Customer: ");
+	printf("---- Welcome to Dinoyan's Bank ----\n");
+	printf("|Select your account type|\n");
+	printf("|1: Admin| |2: Customer| ");
 	scanf("%d", &userType);
 
 	while (selected == 0) {
@@ -250,9 +267,8 @@ int main() {
 			selected = 1;
 			createAccount(SPECIAL_KEY);
 		} else {
-
 			printf("Please enter the correct type\n");
-			printf("1: Admin \n2: Customer: ");
+			printf("|1: Admin| |2: Customer| ");
 			scanf("%d", &userType);
 		}
 	}
