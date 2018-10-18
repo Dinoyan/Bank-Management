@@ -163,6 +163,14 @@ void createAccount(int userType) {
 
 
 void adminInterface() {
+
+/*
+BREAK THIS INTO 2 INTERFACES:
+	1. Menu for admin
+		- What to do? Help with customer or logout
+	2. Menu when helping customer.
+*/
+
 	int logout = 0;
 	int choice, accNum, password, authenticated;
 	printf("Admin Interface: ");
