@@ -5,3 +5,4 @@ This is a simple bank management project made with C. Made like real life bankin
 
 
 
+test
