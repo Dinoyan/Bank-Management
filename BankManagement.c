@@ -30,7 +30,7 @@ struct Admin {
 
 
 void getStatement() {
-
+	customerInterface();
 }
 
 
@@ -164,26 +164,48 @@ void createAccount(int userType) {
 }
 
 
-void adminInterface() {
-
 /*
-BREAK THIS INTO 2 INTERFACES:
+BREAK INTO 2 INTERFACES:
 	1. Menu for admin
 		- What to do? Help with customer or logout
 	2. Menu when helping customer.
 */
 
+
+void adminMainInterface() {
+	int adminChoice;
+	printf("Admin Interface: ");
+	printf("1: Help a customer 2: logout");
+
+	while ((getchar()) != '\n');
+	scanf("%d", &adminChoice);
+
+	if(adminChoice == 1) {
+		adminCustomerInterface();
+	} else if (adminChoice == 2) {
+		activeAdminSession = 0;
+		system("clear");
+	} else {
+		adminMainInterface
+	}
+}
+
+
+void adminCustomerInterface() {
 	int logout = 0;
 	int choice, accNum, password, authenticated;
-	printf("Admin Interface: ");
+	printf("Customer help interface: ");
 	printf("Hello, please login!\n");
 
-	printf("Account number: ");
-	while ((getchar()) != '\n');
-	scanf("%d", &accNum);
-	printf("Enter password: ");
-	while ((getchar()) != '\n');
-	scanf("%d", &password);
+	if (activeCustomerSession != 1) {
+		printf("Account number: ");
+		while ((getchar()) != '\n');
+		scanf("%d", &accNum);
+		printf("Enter password: ");
+		while ((getchar()) != '\n');
+		scanf("%d", &password);
+	}
+	
 	authenticated = authenticate(CUSTOMER_TYPE, accNum, password);
 	if (authenticated == 1) {
 		activeCustomerSession = 1;
@@ -201,8 +223,11 @@ BREAK THIS INTO 2 INTERFACES:
 			system("clear");
 			printf("logged out successfully\n");
 			printf("--------------------------\n");
+			adminMainInterface();
 		} else {
-			adminInterface();
+			adminCustomerInterface();
+			print("please select the correct opotion");
+			system('clear');
 		}
 	}
 }
