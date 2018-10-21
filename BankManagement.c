@@ -11,6 +11,9 @@
 int activeCustomerSession = 0;
 int activeAdminSession = 0;
 
+void adminMainInterface(void);
+void adminCustomerInterface(void);
+
 struct Customer {
 	int accType;
 	char firstName[64];
@@ -30,7 +33,7 @@ struct Admin {
 
 
 void getStatement() {
-	customerInterface();
+	//customerInterface();
 }
 
 
@@ -76,7 +79,6 @@ int authenticate(int userType, int accNum, int password) {
 		while (fread(&customer, sizeof(struct Customer), 1, customerfile)) {
 			if ((customer.accNum == accNum) && (customer.password == password)) {
 				authenticated = 1;
-				printf("success\n");
 			} else {
 				authenticated = 0;
 			}
@@ -174,8 +176,8 @@ BREAK INTO 2 INTERFACES:
 
 void adminMainInterface() {
 	int adminChoice;
-	printf("Admin Interface: ");
-	printf("1: Help a customer 2: logout");
+	printf("|Admin Interface|\n");
+	printf("1: Help a customer 2: logout\n");
 
 	while ((getchar()) != '\n');
 	scanf("%d", &adminChoice);
@@ -186,7 +188,7 @@ void adminMainInterface() {
 		activeAdminSession = 0;
 		system("clear");
 	} else {
-		adminMainInterface
+		adminMainInterface();
 	}
 }
 
@@ -194,7 +196,7 @@ void adminMainInterface() {
 void adminCustomerInterface() {
 	int logout = 0;
 	int choice, accNum, password, authenticated;
-	printf("Customer help interface: ");
+	printf("|Customer help interface|\n");
 	printf("Hello, please login!\n");
 
 	if (activeCustomerSession != 1) {
@@ -226,8 +228,8 @@ void adminCustomerInterface() {
 			adminMainInterface();
 		} else {
 			adminCustomerInterface();
-			print("please select the correct opotion");
-			system('clear');
+			printf("please select the correct opotion");
+			system("clear");
 		}
 	}
 }
@@ -236,14 +238,16 @@ void adminCustomerInterface() {
 void admin() {
 	int authenticated, accNum, password, choice;
 	printf("Account number: ");
+	while ((getchar()) != '\n');
 	scanf("%d", &accNum);
 	printf("Enter password: ");
+	while ((getchar()) != '\n');
 	scanf("%d", &password);
 	authenticated = authenticate(ADMIN_TYPE, accNum, password);
 	if (authenticated == 1) {
 		activeAdminSession = 1;
 		system("clear");
-		adminInterface();
+		adminMainInterface();
 	} else {
 		system("clear");
 		printf("Login failed\n");
@@ -258,7 +262,7 @@ void customerInterface() {
 	int choice;
 	printf("Customer Interface: ");
 	printf("----menu---- \n");
-	printf("|1: Balance| \n|2: Statement| \n|3: logout|");
+	printf("|1: Balance| \n|2: Statement| \n|3: logout| \n");
 	while ((getchar()) != '\n');
 	scanf("%d", &choice);
 	if (choice == 1) {
