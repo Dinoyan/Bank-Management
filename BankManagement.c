@@ -1,4 +1,8 @@
-//@author Dinoyan 
+/*
+@author Dinoyan 
+
+Inspired by: 
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,6 +17,7 @@ int activeAdminSession = 0;
 
 void adminMainInterface(void);
 void adminCustomerInterface(void);
+void customerInterface(int);
 
 struct Customer {
 	int accType;
@@ -32,8 +37,26 @@ struct Admin {
 };
 
 
-void getStatement() {
-	//customerInterface();
+void getStatement(int accNum) {
+	FILE *customerfile;
+	struct Customer customer;
+
+	customerfile = fopen("customer.dat", "r");
+	if(customerfile == NULL){
+		fprintf(stderr, "error opening file");
+		exit(1);
+	}
+
+	while(fread(%customer. sizeof(struct Customer), 1, customerfile)) {
+		if (customer.accNum == accNum){
+			prinf("|Statement|\n");
+			printf("%s %s\n", customer.firstName, customer.lastName);
+			printf("Balance: %f\n",customer.balance);
+		}
+	}
+	fclose(customerfile);
+
+	customerInterface();
 }
 
 
@@ -257,7 +280,7 @@ void admin() {
 }
 
 
-void customerInterface() {
+void customerInterface(int accNum) {
 	int logout = 0;
 	int choice;
 	printf("Customer Interface: ");
@@ -268,7 +291,7 @@ void customerInterface() {
 	if (choice == 1) {
 
 	} else if (choice == 2) {
-		getStatement();
+		getStatement(int accNum);
 	} else if (choice == 3) {
 		activeCustomerSession = 0;
 		system("clear");
@@ -292,7 +315,7 @@ void customer() {
 	if (authenticated == 1) {
 		activeCustomerSession = 1;
 		system("clear");
-		customerInterface();
+		customerInterface(accNum);
 	} else {
 		system("clear");
 		printf("Login failed");
