@@ -71,7 +71,10 @@ float withdraw() {
 	return newBalance;
 }
 
-
+/*
+* Used to authenticate users using their account number
+* and password.
+*/
 int authenticate(int userType, int accNum, int password) {
 	int authenticated = 0;
 
@@ -110,7 +113,10 @@ int authenticate(int userType, int accNum, int password) {
 	return authenticated;
 }
 
-
+/*
+* This function is used to create new accounts for admins 
+* and customers.
+*/
 void createAccount(int userType) {
 	char firstName[64];
 	char lastName[64];
