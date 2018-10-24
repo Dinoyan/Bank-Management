@@ -8,10 +8,12 @@ Inspired by:
 #include <stdlib.h>
 #include <string.h>
 
+// 
 #define SPECIAL_KEY 1998
 #define ADMIN_TYPE 1
 #define CUSTOMER_TYPE 2
 
+// global variables to see if the user's session is active or not
 int activeCustomerSession = 0;
 int activeAdminSession = 0;
 
@@ -59,13 +61,20 @@ void getStatement(int accNum) {
 	customerInterface();
 }
 
-
-void deposit() {
+/*
+* deposit to customer account given amount and update the
+* current balance.
+*/
+void deposit(float amount) {
 	float newBalance = 0.0;
 }
 
 
-float withdraw() {
+/*
+* withdraw amoount from the customer and update the 
+* current balance.
+*/
+float withdraw(float amoount) {
 	float newBalance = 0.0;
 
 	return newBalance;
