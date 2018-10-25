@@ -305,6 +305,7 @@ void admin() {
 
 
 void customerInterface(int accNum) {
+	int tempAccNum = accNum;
 	int logout = 0;
 	int choice;
 	printf("Customer Interface: ");
@@ -323,7 +324,7 @@ void customerInterface(int accNum) {
 		printf("--------------------------\n");
 	} else {
 		system("clear");
-		customerInterface();
+		customerInterface(tempAccNum);
 	}
 }
 
