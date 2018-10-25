@@ -153,10 +153,6 @@ void createAccount(int userType) {
 	printf("Enter your new password: ");
 	scanf("%d", &password);
 
-	char filename[50]; 
-	sprintf(filename, "%d", accNum); 
-
-	prinf("%s", filename);
 
 	
 	if (userType == 2) {
@@ -167,22 +163,28 @@ void createAccount(int userType) {
 		if (customerfile == NULL) {
 			fprintf(stderr, "\nError opend file\n");
 			exit (1);
-		}
-
+		} 
 		struct Customer customer;
 
-		strcpy(customer.firstName, firstName);
-		strcpy(customer.lastName, lastName);
-		customer.accType = CUSTOMER_TYPE;
-		customer.accNum = accNum;
-		customer.password = password;
+		while (fread(&customer, sizeof(struct Customer), 1, customerfile)) {
+			if (customer.accNum == accNum) {
+				// Account number used.
+			} else {
+				strcpy(customer.firstName, firstName);
+				strcpy(customer.lastName, lastName);
+				customer.accType = CUSTOMER_TYPE;
+				customer.accNum = accNum;
+				customer.password = password;
 
-		// write struct to file
-		fwrite (&customer, sizeof(struct Customer), 1, customerfile);
+				// write struct to file
+				fwrite (&customer, sizeof(struct Customer), 1, customerfile);
 
-
+			}
+		}
 		// close file
-		authenticate(2, accNum, password);
+		fclose(customerfile);
+		// authenticate(2, accNum, password);
+
 	} else if (userType == SPECIAL_KEY) {
 		FILE *adminfile;
 
