@@ -153,6 +153,12 @@ void createAccount(int userType) {
 	printf("Enter your new password: ");
 	scanf("%d", &password);
 
+	char filename[50]; 
+	sprintf(filename, "%d", accNum); 
+
+	prinf("%s", filename);
+
+	
 	if (userType == 2) {
 		FILE *customerfile;
 
@@ -234,6 +240,7 @@ void adminMainInterface() {
 void adminCustomerInterface() {
 	int logout = 0;
 	int choice, accNum, password, authenticated;
+	float amount = 0.0;
 	printf("|Customer help interface|\n");
 	printf("Hello, please login!\n");
 
@@ -257,7 +264,9 @@ void adminCustomerInterface() {
 		if (choice == 1) {
 			deposit();
 		} else if (choice == 2) {
-			withdraw();
+			printf("Enter the amount to withdraw: ");
+			scanf("%f", &amount);
+			withdraw(amount);
 		} else if (choice == 3) {
 			activeCustomerSession = 0;
 			system("clear");
@@ -306,7 +315,7 @@ void customerInterface(int accNum) {
 	if (choice == 1) {
 
 	} else if (choice == 2) {
-		getStatement(int accNum);
+		getStatement(accNum);
 	} else if (choice == 3) {
 		activeCustomerSession = 0;
 		system("clear");
