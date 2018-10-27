@@ -351,8 +351,7 @@ void customer() {
 	}
 }
 
-
-int main() {
+void menu(){
 	int userType;
 	int selected = 0;
 
@@ -376,8 +375,15 @@ int main() {
 			createAccount(SPECIAL_KEY);
 		} else {
 			printf("Please enter the correct type\n");
-			printf("|1: Admin| |2: Customer| ");
-			scanf("%d", &userType);
+			menu();
 		}
 	}
+
+}
+
+int main() {
+
+	menu();
+
+	return 0;
 }
