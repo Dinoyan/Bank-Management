@@ -361,7 +361,25 @@ void menu(){
 	scanf("%d", &userType);
 
 	while (selected == 0) {
-		if (userType == 1) {
+		switch(userType){
+			case 1:
+				selected = 1;
+				system("clear");
+				admin();
+			case 2:
+				selected = 2;
+				system("clear");
+				customer();
+			case SPECIAL_KEY:
+				system("clear");
+				selected = 1;
+				createAccount(SPECIAL_KEY);
+			default :
+				printf("Please enter the correct type\n");
+				menu();
+		}
+		
+		/*if (userType == 1) {
 			selected = 1;
 			system("clear");
 			admin();
@@ -376,7 +394,7 @@ void menu(){
 		} else {
 			printf("Please enter the correct type\n");
 			menu();
-		}
+		}*/
 	}
 
 }
