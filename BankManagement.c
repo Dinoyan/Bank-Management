@@ -54,16 +54,16 @@ void getStatement(int accNum) {
 		exit(1);
 	}
 
-	while(fread(%customer. sizeof(struct Customer), 1, customerfile)) {
+	while(fread(&customer, sizeof(struct Customer), 1, customerfile)) {
 		if (customer.accNum == accNum){
-			prinf("|Statement|\n");
+			printf("|Statement|\n");
 			printf("%s %s\n", customer.firstName, customer.lastName);
 			printf("Balance: %f\n",customer.balance);
 		}
 	}
 	fclose(customerfile);
 
-	customerInterface();
+	customerInterface(accNum);
 }
 
 /*
@@ -273,7 +273,10 @@ void adminCustomerInterface() {
 		while ((getchar()) != '\n');
 		scanf("%d", &choice);
 		if (choice == 1) {
-			deposit();
+			printf("Enter the amount to deposit: ");
+			scanf("%f", &amount);
+			withdraw(amount);
+			deposit(amount);
 		} else if (choice == 2) {
 			printf("Enter the amount to withdraw: ");
 			scanf("%f", &amount);
