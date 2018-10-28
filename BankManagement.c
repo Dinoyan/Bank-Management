@@ -8,7 +8,7 @@ Inspired by:
 #include <stdlib.h>
 #include <string.h>
 
-// 
+// defined constants
 #define SPECIAL_KEY 1998
 #define ADMIN_TYPE 1
 #define CUSTOMER_TYPE 2
@@ -21,6 +21,7 @@ void adminMainInterface(void);
 void adminCustomerInterface(void);
 void customerInterface(int);
 
+// Struct to store the customers attributes
 struct Customer {
 	int accType;
 	char firstName[64];
@@ -30,6 +31,7 @@ struct Customer {
 	float balance;
 };
 
+// Struct to store the admins attributes
 struct Admin {
 	int accType;
 	char firstName[64];
@@ -38,7 +40,10 @@ struct Admin {
 	int password;
 };
 
-
+/*
+* Returns the customer's balace given their account number.
+* Future plan: record each transaction.
+*/
 void getStatement(int accNum) {
 	FILE *customerfile;
 	struct Customer customer;
@@ -219,7 +224,9 @@ BREAK INTO 2 INTERFACES:
 	2. Menu when helping customer.
 */
 
-
+/*
+* Displays the admin's menu UI
+*/
 void adminMainInterface() {
 	int adminChoice;
 	printf("|Admin Interface|\n");
@@ -238,7 +245,9 @@ void adminMainInterface() {
 	}
 }
 
-
+/*
+* Displays the UI when an admin helps a customer
+*/
 void adminCustomerInterface() {
 	int logout = 0;
 	int choice, accNum, password, authenticated;
@@ -305,7 +314,9 @@ void admin() {
 	}
 }
 
-
+/*
+* Displays the customer's UI
+*/
 void customerInterface(int accNum) {
 	int tempAccNum = accNum;
 	int logout = 0;
@@ -351,6 +362,10 @@ void customer() {
 	}
 }
 
+/*
+* Main menu, where admin and customer picks who they are
+*/
+
 void menu(){
 	int userType;
 	int selected = 0;
@@ -378,7 +393,7 @@ void menu(){
 				printf("Please enter the correct type\n");
 				menu();
 		}
-		
+
 		/*if (userType == 1) {
 			selected = 1;
 			system("clear");
