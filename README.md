@@ -8,3 +8,13 @@ Project still in progress
 Future Plan(s):
   - Create a single file for each users
   - Better UI
+  
+  
+
+### Deployment
+
+* Clone this repo
+* cd into the repo
+* `gcc -Wall -std=gnu99 -g -o bank BankManagement.c'
+* `./bank
+
