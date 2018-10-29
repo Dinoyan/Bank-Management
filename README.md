@@ -15,6 +15,6 @@ Future Plan(s):
 
 * Clone this repo
 * cd into the repo
-* `gcc -Wall -std=gnu99 -g -o bank BankManagement.c'
-* `./bank
+* `gcc -Wall -std=gnu99 -g -o bank BankManagement.c`
+* `./bank`
 
