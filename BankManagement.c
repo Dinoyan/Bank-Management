@@ -396,23 +396,6 @@ void menu(){
 				printf("Please enter the correct type\n");
 				menu();
 		}
-
-		/*if (userType == 1) {
-			selected = 1;
-			system("clear");
-			admin();
-		} else if (userType == 2) {
-			selected = 2;
-			system("clear");
-			customer();
-		} else if (userType == SPECIAL_KEY) {
-			system("clear");
-			selected = 1;
-			createAccount(SPECIAL_KEY);
-		} else {
-			printf("Please enter the correct type\n");
-			menu();
-		}*/
 	}
 
 }
