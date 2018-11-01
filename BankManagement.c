@@ -379,6 +379,7 @@ void menu(){
 	scanf("%d", &userType);
 
 	while (selected == 0) {
+		// based on the selected option, call the correct function
 		switch(userType){
 			case 1:
 				selected = 1;
@@ -401,7 +402,7 @@ void menu(){
 }
 
 int main() {
-
+	// call menu function to display the menu
 	menu();
 
 	return 0;
