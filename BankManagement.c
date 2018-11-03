@@ -79,7 +79,7 @@ void deposit(float amount) {
 * withdraw amoount from the customer and update the 
 * current balance.
 */
-float withdraw(float amoount) {
+float withdraw(float amount) {
 	float newBalance = 0.0;
 
 	return newBalance;
