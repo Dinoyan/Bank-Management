@@ -7,6 +7,9 @@ Inspired by:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Customer.h"
+#include "Admin.h"
+#include "AccManager.h"
 
 // defined constants
 #define SPECIAL_KEY 1998
