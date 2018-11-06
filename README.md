@@ -9,6 +9,8 @@ Future Plan(s):
   - Create a single file for each users
   - Better UI
   
+- Currently splitting up the code
+  
   
 
 ### Deployment
