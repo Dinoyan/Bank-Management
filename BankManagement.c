@@ -51,7 +51,7 @@ void getStatement(int accNum) {
 	FILE *customerfile;
 	struct Customer customer;
 
-	customerfile = fopen("customer.dat", "r");
+	customerfile = fopen("db/customer.dat", "r");
 	if(customerfile == NULL){
 		fprintf(stderr, "error opening file");
 		exit(1);
@@ -99,7 +99,7 @@ int authenticate(int userType, int accNum, int password) {
 		FILE *adminfile;
 		struct Admin admin;
 
-		adminfile = fopen("admin.dat", "r");
+		adminfile = fopen("db/admin.dat", "r");
 		if (adminfile == NULL) {
 			fprintf(stderr, "\nError opening file\n");
 			exit(1);
@@ -114,7 +114,7 @@ int authenticate(int userType, int accNum, int password) {
 		FILE *customerfile;
 		struct Customer customer;
 
-		customerfile = fopen("customer.dat", "r");
+		customerfile = fopen("db/customer.dat", "r");
 		if (customerfile == NULL) {
 			fprintf(stderr, "\nError opening file\n");
 			exit(1);
@@ -167,7 +167,7 @@ void createAccount(int userType) {
 		FILE *customerfile;
 
 		// open file for writing
-		customerfile = fopen ("customer.dat", "w");
+		customerfile = fopen ("db/customer.dat", "w");
 		if (customerfile == NULL) {
 			fprintf(stderr, "\nError opend file\n");
 			exit (1);
@@ -197,7 +197,7 @@ void createAccount(int userType) {
 		FILE *adminfile;
 
 		// open file for writing
-		adminfile = fopen ("admin.dat", "w");
+		adminfile = fopen ("db/admin.dat", "w");
 		if (adminfile == NULL) {
 			fprintf(stderr, "\nError opend file\n");
 			exit (1);
