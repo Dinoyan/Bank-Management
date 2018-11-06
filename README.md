@@ -10,6 +10,12 @@ Future Plan(s):
   - Better UI
   
 - Currently splitting up the code
+
+### Functions
+  #### AccManager.h
+  ```int int authenticate(int userType, int accNum, int password)```
+  Used to authenticate users using their account number
+  and password.
   
   
 
