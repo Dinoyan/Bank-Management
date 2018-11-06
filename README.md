@@ -13,9 +13,9 @@ Future Plan(s):
 
 ### Functions
   #### AccManager.h
-         ```int int authenticate(int userType, int accNum, int password)```
+  - ```int int authenticate(int userType, int accNum, int password)```
   
-          - Used to authenticate users using their account number
+    Used to authenticate users using their account number
             and password.
   
   
