@@ -17,6 +17,11 @@ Future Plan(s):
   
     Used to authenticate users using their account number
             and password.
+  - ```void createAccount(int userType)```
+  
+      This function is used to create new accounts for admins 
+  and customers.
+    
   
   
 
