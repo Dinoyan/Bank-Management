@@ -6,7 +6,7 @@ This is a simple bank management project made with C. Made like real life bankin
 Project still in progress
 
 Future Plan(s):
-  - Create a single file for each users
+  - Create a single file for each user
   - Better UI
   
 - Currently splitting up the code
